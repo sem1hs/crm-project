@@ -1,5 +1,5 @@
 "use client";
-import getAllCompanies from "@/hooks/getAllCompanies";
+import getAllCompanies from "@/hooks/useGetAllCompanies";
 import SirketCard from "@/components/Sirketler/SirketCard";
 import Loader from "@/components/Loader/Loader";
 

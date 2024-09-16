@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import Link from "next/link";
 
-const AsideSubLink = ({ info, isOpen }) => {
+const AsideSubLink = ({ info }) => {
   return (
     <li
       className={clsx(

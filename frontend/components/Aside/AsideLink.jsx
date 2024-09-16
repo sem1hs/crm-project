@@ -48,7 +48,7 @@ const AsideLink = ({ val }) => {
         )}
       >
         {val.sublinks?.map((val, i) => (
-          <AsideSubLink info={val} key={i} isOpen={isOpen} />
+          <AsideSubLink info={val} key={i} />
         ))}
       </ul>
     </li>
