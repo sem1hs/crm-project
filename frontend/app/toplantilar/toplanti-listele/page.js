@@ -1,7 +1,12 @@
 import React from "react";
+import Meetings from "@/components/Meeting/Meetings";
 
 const Page = () => {
-  return <div></div>;
+  return (
+    <main className="w-full">
+      <Meetings />
+    </main>
+  );
 };
 
 export default Page;

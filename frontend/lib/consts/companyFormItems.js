@@ -6,7 +6,7 @@ export const companyFormItems = [
   },
   {
     title: "Adres",
-    id: "adres",
+    id: "adress",
     type: "text",
   },
   {

@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.get("/getAllCompanies", getAllCompanies);
 router.get("/getCompanyById", protectRoute, checkAuthority, getCompanyById);
-router.post("/postCompany", protectRoute, checkAuthority, postCompany);
+router.post("/postCompany", postCompany);
 
 module.exports = router;

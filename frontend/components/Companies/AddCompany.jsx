@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Form from "@/components/Sirketler/Form";
+import Form from "@/components/Companies/Form";
 
-const SirketEkle = () => {
+const AddCompany = () => {
   return (
     <section className="py-20">
       <div className="max-w-screen-2xl mx-auto px-16 py-18">
@@ -22,4 +22,4 @@ const SirketEkle = () => {
   );
 };
 
-export default SirketEkle;
+export default AddCompany;

@@ -1,10 +1,11 @@
 const { pool } = require("../../config/db");
 
-exports.findAllUser = async () => {
+exports.findProjectByName = async (projectname) => {
   try {
     const data = await pool.query({
-      name: "findAllUser",
-      text: "SELECT * FROM users",
+      name: "findProjectByName",
+      text: 'SELECT * FROM projects WHERE "name" = $1',
+      values: [projectname],
     });
 
     return data.rows;

@@ -1,7 +1,12 @@
 import React from "react";
+import Projects from "@/components/Projects/Projects";
 
 const Page = () => {
-  return <div></div>;
+  return (
+    <main className="w-full">
+      <Projects />
+    </main>
+  );
 };
 
 export default Page;

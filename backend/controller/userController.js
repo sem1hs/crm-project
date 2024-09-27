@@ -2,6 +2,7 @@ const { createCookieAndSetToken } = require("../utils/createCookieAndSetToken");
 const { createUser } = require("../services/user/createUser");
 const { findUserByUsername } = require("../services/user/findUserByUsername");
 const { hashPassword, comparePassword } = require("../utils/hashPassword");
+const { findAllUser } = require("../services/user/findAllUser");
 
 exports.signup = async (req, res) => {
   try {
@@ -73,6 +74,42 @@ exports.logout = async (req, res) => {
       status: "Success",
       message: "Başarıyla çıkış yapıldı",
     });
+  } catch (error) {
+    res.status(400).json({ status: "Error", message: error.message });
+  }
+};
+
+exports.getUserByUsername = async (req, res) => {
+  try {
+    const { username } = req.query;
+    if (!username) {
+      return res.status(400).json({
+        status: "Error",
+        message: "Username yok, lütfen tekrar deneyin",
+      });
+    }
+
+    const user = await findUserByUsername(username);
+    if (!user || !user.length) {
+      return res
+        .status(400)
+        .json({ status: "Error", message: "Kullanıcı bulunumadı" });
+    }
+    return res.status(200).json({ status: "Success", data: user });
+  } catch (error) {
+    res.status(400).json({ status: "Error", message: error.message });
+  }
+};
+
+exports.getAllUser = async (req, res) => {
+  try {
+    const users = await findAllUser();
+    if (!users || !users.length) {
+      return res
+        .status(200)
+        .json({ status: "Ok", message: "Kullancılar bulunumadı" });
+    }
+    return res.status(200).json({ status: "Success", data: users });
   } catch (error) {
     res.status(400).json({ status: "Error", message: error.message });
   }

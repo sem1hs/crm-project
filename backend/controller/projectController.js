@@ -1,6 +1,8 @@
 const { findAllProjects } = require("../services/project/findAllProjects");
 const { findProjectById } = require("../services/project/findProjectById");
 const { createProject } = require("../services/project/createProject");
+const { findUserByUsername } = require("../services/user/findUserByUsername");
+const { findProjectByName } = require("../services/project/findProjectByName");
 
 exports.getAllProjects = async (req, res) => {
   try {
@@ -60,5 +62,28 @@ exports.postProject = async (req, res) => {
     return res.status(201).json({ status: "Success", data });
   } catch (error) {
     return res.status(400).json({ status: "Error", message: error.message });
+  }
+};
+
+exports.getProjectByName = async (req, res) => {
+  try {
+    const { projectname } = req.query;
+
+    if (!projectname) {
+      return res.status(400).json({
+        status: "Error",
+        message: "Projectname yok, lütfen tekrar deneyin",
+      });
+    }
+
+    const project = await findProjectByName(projectname);
+    if (!project || !project.length) {
+      return res
+        .status(400)
+        .json({ status: "Error", message: "Proje bulunumadı" });
+    }
+    return res.status(200).json({ status: "Success", data: project });
+  } catch (error) {
+    res.status(400).json({ status: "Error", message: error.message });
   }
 };

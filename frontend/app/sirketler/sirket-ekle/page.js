@@ -1,10 +1,10 @@
 import React from "react";
-import SirketEkle from "@/components/Sirketler/SirketEkle";
+import AddCompany from "@/components/Companies/AddCompany";
 
 const Page = () => {
   return (
     <main className="w-full">
-      <SirketEkle />
+      <AddCompany />
     </main>
   );
 };

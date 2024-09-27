@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         primaryBg: "#006666",
+        secondaryBg: "rgb(107 114 128)",
         background: "var(--background)",
         foreground: "var(--foreground)",
       },

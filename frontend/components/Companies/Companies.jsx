@@ -1,10 +1,10 @@
 "use client";
-import getAllCompanies from "@/hooks/useGetAllCompanies";
-import SirketCard from "@/components/Sirketler/SirketCard";
+import CompanyCard from "@/components/Companies/CompanyCard";
 import Loader from "@/components/Loader/Loader";
+import useGetAllCompanies from "@/hooks/useGetAllCompanies";
 
-const Sirketler = () => {
-  const { data: companies, isLoading } = getAllCompanies();
+const Companies = () => {
+  const { data: companies, isLoading } = useGetAllCompanies();
 
   return (
     <section className="py-20">
@@ -25,7 +25,7 @@ const Sirketler = () => {
           {isLoading && <Loader />}
           {!isLoading &&
             companies?.map((companie, i) => (
-              <SirketCard key={i} info={companie} />
+              <CompanyCard key={i} info={companie} />
             ))}
         </ul>
       </div>
@@ -33,4 +33,4 @@ const Sirketler = () => {
   );
 };
 
-export default Sirketler;
+export default Companies;

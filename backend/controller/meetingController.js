@@ -1,6 +1,9 @@
 const { findAllMeetings } = require("../services/meeting/findAllMeetings");
 const { findMeetingById } = require("../services/meeting/findMeetingById");
 const { createMeeting } = require("../services/meeting/createMeeting");
+const {
+  findMeetingDetails,
+} = require("../services/meeting/findMeetingDetails");
 
 exports.getAllMeetings = async (req, res) => {
   try {
@@ -36,9 +39,31 @@ exports.getMeetingById = async (req, res) => {
   }
 };
 
+exports.getMeetingDetails = async (req, res) => {
+  try {
+    const { id } = req.query;
+    if (!id) {
+      return res
+        .status(400)
+        .json({ status: "Error", message: "Id yok, lütfen tekrar deneyin" });
+    }
+
+    const meetingDetails = await findMeetingDetails(id);
+
+    if (!meetingDetails || !meetingDetails.length) {
+      return res
+        .status(200)
+        .json({ status: "Ok", message: "Toplantı bulunumadı" });
+    }
+    return res.status(200).json({ status: "Success", data: meetingDetails });
+  } catch (error) {
+    res.status(400).json({ status: "Error", message: error.message });
+  }
+};
+
 exports.postMeeting = async (req, res) => {
   try {
-    const { meetingDate, startTime, endTime, userId, employeeId, projectId } =
+    const { meetingDate, startTime, endTime, userId, projectId, name } =
       req.body;
 
     if (
@@ -46,8 +71,8 @@ exports.postMeeting = async (req, res) => {
       !startTime ||
       !endTime ||
       !userId ||
-      !employeeId ||
-      !projectId
+      !projectId ||
+      !name
     ) {
       return res
         .status(400)
@@ -56,10 +81,10 @@ exports.postMeeting = async (req, res) => {
 
     const data = await createMeeting(
       meetingDate,
+      name,
       startTime,
       endTime,
       userId,
-      employeeId,
       projectId,
     );
 
